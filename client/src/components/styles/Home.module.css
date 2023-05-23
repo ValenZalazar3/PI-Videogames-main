@@ -1,0 +1,67 @@
+*{
+  margin: 0px;
+  padding: 0px;
+}
+.container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    background-color: #282c34;
+  }
+  
+  .card {
+    background-color: #282c34;
+    border: 2px solid transparent;
+    border-radius: 10px;
+    padding: 10px;
+    text-align: center;
+    transition: border-color 0.3s ease-in-out;
+    margin: 10px;
+    width: calc(25% - 20px); /* Ajusta el ancho de la tarjeta según tus necesidades */
+  }
+  
+  .card:hover {
+    border-color: #61dafb;
+  }
+  
+  .card h3 {
+    color: #61dafb;
+    font-size: 18px;
+    margin-bottom: 10px;
+  }
+  
+  .card img {
+    border-radius: 10px;
+    margin-bottom: 10px;
+    width: 100%;
+    height: auto;
+  }
+  
+  .card h6 {
+    color: #fff;
+    font-size: 14px;
+  }
+
+  .button {
+    background-color: #282c34;
+    border: 2px solid transparent;
+    color: #fff;
+    padding: 8px 16px;
+    border-radius: 10px;
+    transition: background-color 0.3s ease-in-out, color 0.3s ease-in-out;
+    margin: 10px;
+  }
+  
+  .button:hover {
+    background-color: #61dafb;
+    color: #000;
+  }
+
+  .homeContainer {
+    position: relative;
+    background-color: #282c34;
+    padding: 20px;
+    overflow: hidden;
+  }
+  
+  

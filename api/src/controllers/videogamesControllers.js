@@ -1,4 +1,4 @@
-const { Videogame, Genre, Op } = require('../db');
+const { Videogame, Genre, Op, sequelize } = require('../db');
 const axios = require ('axios');
 require("dotenv").config();
 const {API_KEY } = process.env
@@ -16,7 +16,7 @@ const getGamesDb = async () => {
     });
     const data = await response.map(resp => resp.toJSON())
     const videogames = data.map(game => {
-        const genres = game.Genre.map(genre => genre.name)
+        const genres = game.Genre?.map(genre => genre.name)
         return {
             id: game.id,
             createdInDb: game.createdInDb,
@@ -158,40 +158,46 @@ const getGamesById = async (id) => {
     }
 }
 
- 
 
-const createGame = async (game) => {
-    try {
-        const {genres} = game;
-        const newGame = await Videogame.create(game);
-        genres.map(async(el) => {
-            let genreGameDb = await Genre.findOne({
-                where: {
-                    name: el,
-                },
-            });
-            await newGame.addGenre(genreGameDb)
-        })
-        if(!newGame){
-            throw new Error('Error, No se pudo crear el juego')
-        }
-        const gameCreated = await Videogame.findOne({
-            where: {
-                id: newGame.id,
-            },
-            include: {
-                model: Genre,
-                attributes: [],
-                throgh:{
-                    attributes: [],
-                }
-            }
-        })
-        return gameCreated;
-    } catch (error) {
-        return error
+// name, image, vegetarian, vegan, glutenFree, summary, healthScore, steps, diets
+const createGame = async (inputData) => {
+  let transaction = null;
+
+  try {
+    // Busca si ya existe una receta con el mismo título
+    const existingGame = await Videogame.findOne({
+      where: { name: inputData.name },
+    });
+    if (existingGame) {
+      throw new Error("Recipe title already exists.");
     }
-}
+
+    // Inicia la transacción
+    transaction = await sequelize.transaction();
+
+    // Crea la nueva receta en la base de datos
+    const newGame = await Videogame.create({ ...inputData }, { transaction });
+
+    // Agrega los tipos de dieta relacionados a la receta
+    for (const genreName of inputData.genres) {
+        console.log(genreName);
+    const genre = await Genre.findOne({ where: { name: genreName } })
+    await newGame.addGenre(genre, { transaction });
+    }
+
+    // Confirma la transacción
+    await transaction.commit();
+
+    return newGame;
+} catch (error) {
+    // Si ocurre algún error, deshace la transacción
+    if (transaction) {
+    await transaction.rollback();
+    }
+
+    throw error;
+  }
+};
 
 
 

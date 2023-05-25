@@ -12,6 +12,7 @@ module.exports = (sequelize) => {
     },
     name: {
       type: DataTypes.STRING,
+      unique: true,
       allowNull: false,
     },
     description: {
@@ -19,18 +20,18 @@ module.exports = (sequelize) => {
       allowNull:false,
     },
     platforms:{
-      type:DataTypes.STRING,
+      type:DataTypes.ARRAY(DataTypes.TEXT),
       allowNull: false,
     },
     image:{
-      type: DataTypes.STRING,
+      type: DataTypes.STRING(2000),
       allowNull: false,
       validate:{
         isUrl: true,
       }
     },
     released:{
-      type: DataTypes.DATE,
+      type: DataTypes.STRING,
       allowNull: false,
     },
     rating: {

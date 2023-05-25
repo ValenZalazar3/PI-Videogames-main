@@ -148,10 +148,10 @@ export default function Home() {
                                     <Card
                                         id={el.id}
                                         name={el.name}
-                                        image={el.createdInDb ? el.background_image : el.background_image}
+                                        image={el.background_image}
                                         genres={
-                                            el.createdInDb
-                                                ? el.genres.map((el) => el.name).join(" ")
+                                            isNaN(el.id)
+                                                ? ''
                                                 : el.genres.join(" - ")
                                         }
                                     />

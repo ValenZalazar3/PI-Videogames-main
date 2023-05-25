@@ -49,7 +49,7 @@ export const createVideogame = (payload) => {
                 name,
                 image,
                 description,
-                releasedDate: new Date(released),
+                released: new Date(released),
                 rating,
                 platforms,
                 genres,

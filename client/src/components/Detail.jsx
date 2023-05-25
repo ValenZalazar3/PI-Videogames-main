@@ -1,9 +1,11 @@
 import { useParams, } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
-import { getDetailVideogame, deleteDetail } from "../redux/actions";
+import { getDetailVideogame } from "../redux/actions";
+import styles from './styles/Detail.module.css'
 
-//LA LOGICA DEL DETAIL YA ESTA LISTA, FALTA ES RENDERIZAR CON ESTILOS
+
+
 const Detail = () => {
     const { id } = useParams()
     const dispatch = useDispatch()
@@ -19,25 +21,27 @@ const Detail = () => {
 
 
     return(
-        <div>
-            <h1>Detail</h1>
+        <div className={styles.detail}>
+            <h1>Detalles</h1>
 
-            <h2>{detailVideogame.id} </h2>
-            <h1>{detailVideogame.name}</h1>
-            <img src={detailVideogame.img} alt={detailVideogame.name}    width={"200px"} />
-            <h2>{detailVideogame.released}</h2>
-            <h2>{detailVideogame.rating}</h2>
+            <h2>ID: {detailVideogame?.id} </h2>
+            <h1>{detailVideogame?.name}</h1>
+            <img src={detailVideogame?.img} alt={detailVideogame.name}    width={"200px"} />
+            <h2>Fecha de Lanzamiento: {detailVideogame?.released}</h2>
+            <h2>Rating: {detailVideogame?.rating}</h2>
 
-            <h2>Platforms:</h2>
+            <h2>Plataforma:</h2>
             {
-                detailVideogame.platforms?.map(platform => {
-                    return <p>{platform}</p>
-                })
-            }
+    Array.isArray(detailVideogame?.platforms)
+        ? detailVideogame.platforms.map(platform => {
+            return <p>{platform}</p>
+        })
+        : <p>{detailVideogame?.platforms}</p>
+}
 
-            <h2>Genres:</h2>
+            <h2>Género:</h2>
             {
-                detailVideogame.genres?.map(genre => {
+                detailVideogame?.genres?.map(genre => {
                     return <p>{genre}</p>
                 })
             }

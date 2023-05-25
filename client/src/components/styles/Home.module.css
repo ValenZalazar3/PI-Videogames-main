@@ -17,7 +17,7 @@
     text-align: center;
     transition: border-color 0.3s ease-in-out;
     margin: 10px;
-    width: calc(25% - 20px); /* Ajusta el ancho de la tarjeta según tus necesidades */
+    width: calc(25% - 20px); /* Ajusta el ancho de la tarjeta */
   }
   
   .card:hover {

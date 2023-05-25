@@ -14,7 +14,7 @@ router.get("/", async (req, res) => {
         }
         return res.status(200).json(videogamesApi);
     } catch (error) {
-        return res.status(400).json({ error: error.message });
+        return res.status(400).json({ error: error.stack });
     }
 })
 
@@ -42,7 +42,9 @@ router.get('/:id', async (req, res) => {
 
 router.post('/', async (req, res) => {
     const newGame = req.body
+    console.log(newGame);
     const created = await createGame(newGame);
+    
     try {
         res.status(200).json(created)
     } catch (error) {

@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getGenres, createVideogame } from "../redux/actions";
-
+import styles from './styles/Create.module.css'
 const CreateGame = () => {
     const dispatch = useDispatch();
     const genres = useSelector((state) => state.genres);
@@ -187,8 +187,8 @@ const CreateGame = () => {
     };
 
     return (
-        <div>
-            <div>
+        <div className={styles.container}>
+            <div className={styles.form}>
                 <h1>Crear Video Juego</h1>
                 <h4>Completa el formulario</h4>
                 <form autoComplete="off" onSubmit={(event) => handleSubmit(event)}>
@@ -337,8 +337,8 @@ const CreateGame = () => {
                         <button type='submit'>Crear Video Juego!</button>
                 </form>
             </div>
+            
         </div>
-
     )
 }
 

@@ -159,12 +159,12 @@ const getGamesById = async (id) => {
 }
 
 
-// name, image, vegetarian, vegan, glutenFree, summary, healthScore, steps, diets
+// name, image, rating, released, description, genero
 const createGame = async (inputData) => {
   let transaction = null;
 
   try {
-    // Busca si ya existe una receta con el mismo título
+    // Busca si ya existe un juego con el mismo título
     const existingGame = await Videogame.findOne({
       where: { name: inputData.name },
     });
@@ -175,10 +175,10 @@ const createGame = async (inputData) => {
     // Inicia la transacción
     transaction = await sequelize.transaction();
 
-    // Crea la nueva receta en la base de datos
+    // Crea el nuevo juego en la base de datos
     const newGame = await Videogame.create({ ...inputData }, { transaction });
 
-    // Agrega los tipos de dieta relacionados a la receta
+    // Agrega los tipos de juegos relacionados a la receta
     for (const genreName of inputData.genres) {
         console.log(genreName);
     const genre = await Genre.findOne({ where: { name: genreName } })

@@ -187,7 +187,7 @@ const createGame = async (inputData) => {
 
     // Confirma la transacción
     await transaction.commit();
-
+    console.log(newGame)
     return newGame;
 } catch (error) {
     // Si ocurre algún error, deshace la transacción

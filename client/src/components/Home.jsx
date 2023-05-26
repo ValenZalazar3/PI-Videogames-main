@@ -83,10 +83,6 @@ export default function Home() {
         dispatch(deleteStates());
     }
 
-    function handleClick(event) {
-        event.preventDefault();
-        dispatch(getAllGames());
-    }
 
     return (<div className={styles.homeContainer}>
             <Link to="/createGame">
@@ -94,10 +90,7 @@ export default function Home() {
             </Link>
             <SearchBar />
             <h1>VAMO A JUGA</h1>
-
-            <button onClick={(event) => handleClick(event)} className={styles.button}>
-                Cargar todos los personajes
-            </button>
+            
 
             <div>
                 <select onChange={(event) => handleOrderAlphabetically(event)}>
@@ -116,11 +109,13 @@ export default function Home() {
                     <option value="default" disabled>Genres</option>
                     {genres?.map((el, i) => {
                         return (
-                            <option key={i} value={el}>
+                            <option key={i} value={el} >
                                 {el}
                             </option>
+                            
                         )
                     })
+
                     }
                 </select>
 
@@ -131,7 +126,7 @@ export default function Home() {
                     <option value="From Api">Api Games</option>
                 </select>
 
-                <button onChange={(event) => ClearFilter(event)} className={styles.button}>
+                <button onClick={(event) => ClearFilter(event)} className={styles.button}>
                     Limpiar Filtros
                 </button>
 

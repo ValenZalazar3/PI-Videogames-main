@@ -7,6 +7,7 @@
     flex-wrap: wrap;
     justify-content: center;
     background-color: #282c34;
+    
   }
   
   .card {
@@ -62,6 +63,7 @@
     background-color: #282c34;
     padding: 20px;
     overflow: hidden;
+    min-height: 101vh;
   }
   
   

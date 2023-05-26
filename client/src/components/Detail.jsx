@@ -26,7 +26,7 @@ const Detail = () => {
 
             <h2>ID: {detailVideogame?.id} </h2>
             <h1>{detailVideogame?.name}</h1>
-            <img src={detailVideogame?.img} alt={detailVideogame.name}    width={"200px"} />
+            <img src={detailVideogame?.image ? detailVideogame?.image : detailVideogame?.img} alt={detailVideogame.name}    width={"200px"} />
             <h2>Fecha de Lanzamiento: {detailVideogame?.released}</h2>
             <h2>Rating: {detailVideogame?.rating}</h2>
 
@@ -47,10 +47,6 @@ const Detail = () => {
             }
 
             <p>{detailVideogame.description}</p>
-        
-
-
-
         </div>
     )
 }

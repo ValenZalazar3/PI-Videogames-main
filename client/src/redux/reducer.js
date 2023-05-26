@@ -117,8 +117,9 @@ function rootReducer(state = initialState, action) {
             };
         case FILTER_BY_GENRES:
             const getAllVideoGames = state.getAllVideoGames;
+            console.log(getAllVideoGames)
             const filteredArr = getAllVideoGames.filter((el) =>
-                el.genres.includes(payload)
+            el.genres.includes(payload)
             );
             return {
                 ...state,
